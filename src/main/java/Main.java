@@ -16,7 +16,8 @@ import java.util.stream.Collectors;
 
 public class Main {
     private static final Logger log = LogManager.getLogger(Main.class);
-    public static void main(String[] args) throws InterruptedException, ExecutionException {
+    public static void main(String[] args)
+            throws InterruptedException, ExecutionException {
         log.info("Sleeping for 1 minute");
         Thread.sleep(1000*60);
         while(true) {
@@ -26,12 +27,11 @@ public class Main {
         }
     }
 
-
-
-    static void queryPrometheus() throws ExecutionException, InterruptedException {
+    static void queryPrometheus()
+            throws ExecutionException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         String testtopic1 = "http://prometheus-operated:9090/api/v1/query?" +
-                "query=testtopic1";
+                "query=testtopic1i";
         String testtopic2 = "http://prometheus-operated:9090/api/v1/query?" +
                 "query=testtopic2";
         String testtopic2i = "http://prometheus-operated:9090/api/v1/query?" +
@@ -62,14 +62,16 @@ public class Main {
         for (CompletableFuture<String> cf :  results) {
             System.out.println(parseJson(cf.get()));
             }
-
     }
 
     static Double parseJson(String json ) {
         //json string from prometheus
-        //{"status":"success","data":{"resultType":"vector","result":[{"metric":{"topic":"testtopic1"},"value":[1659006264.066,"144.05454545454546"]}]}}
-        //{"status":"success","data":{"resultType":"vector","result":[{"metric":{"__name__":"testtopic2","container":"cons1persec","endpoint":"brom",
-        // "instance":"10.124.2.54:8080","job":"default/demoobservabilitypodmonitor","namespace":"default","pod":"cons1persec-6765c9946c-pl9f4","topic_to":"testtopic2"},"value":[1680516659.037,"37612"]}]}}
+        //{"status":"success","data":{"resultType":"vector","result":
+        // [{"metric":{"topic":"testtopic1"},"value":[1659006264.066,"144.05454545454546"]}]}}
+        //{"status":"success","data":{"resultType":"vector","result":
+        // [{"metric":{"__name__":"testtopic2","container":"cons1persec","endpoint":"brom",
+        // "instance":"10.124.2.54:8080","job":"default/demoobservabilitypodmonitor","namespace":"default",
+        // "pod":"cons1persec-6765c9946c-pl9f4","topic_to":"testtopic2"},"value":[1680516659.037,"37612"]}]}}
         try {
             JSONObject jsonObject = JSONObject.parseObject(json);
             JSONObject j2 = (JSONObject) jsonObject.get("data");
@@ -83,7 +85,6 @@ public class Main {
             return 0.0;
         }
     }
-
 
 }
 
