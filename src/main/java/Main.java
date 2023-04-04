@@ -30,7 +30,7 @@ public class Main {
     static void queryPrometheus()
             throws ExecutionException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
-        String testtopic1 = "http://prometheus-operated:9090/api/v1/query?" +
+        String testtopic1i = "http://prometheus-operated:9090/api/v1/query?" +
                 "query=testtopic1i";
         String testtopic2 = "http://prometheus-operated:9090/api/v1/query?" +
                 "query=testtopic2";
@@ -39,10 +39,13 @@ public class Main {
         String testtopic3 = "http://prometheus-operated:9090/api/v1/query?" +
                 "query=testtopic3";
 
+
+
+
         List<URI> queries = new ArrayList<>();
         try {
             queries = Arrays.asList(
-                    new URI(testtopic1),
+                    new URI(testtopic1i),
                     new URI(testtopic2),
                     new URI(testtopic2i),
                     new URI(testtopic3)
